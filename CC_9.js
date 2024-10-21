@@ -14,6 +14,7 @@ class Book {
     }
 }
 
+// Task 2: Create a section class
 class Section {
     constructor(name) {
         this.name = name;
@@ -40,4 +41,34 @@ class Section {
     }
 }
 
+// Task 3: Create a patron class
+class Patron {
+    constructor(name) {
+        this.name = name;
+        this.borrowedBooks = [];// This holds the borrowed books
+    }
+
+    // Borrow book function
+    borrowBook(book) {
+        if (book.isAvailable) {
+            book.isAvailable = false; // If false, mark as borrowed
+            this.borrowedBooks.push(book); // Add the book to borrowed list
+            console.log(`${this.name} borrowed "${book.title}"`);
+        } else {
+            console.log(`Sorry, "${book.title}" is not available.`); // Shows the book as unavailable
+        }
+    }
+
+    // Return book function
+    returnBook(book) {
+        const index = this.borrowedBooks.indexOf(book);
+        if (index >= 0) {
+            book.isAvailable = true; // This shows that the book is available
+            this.borrowedBooks.splice(index, 1); // Remove book from borrowed list
+            console.log(`${this.name} returned "${book.title}"`);
+        } else {
+            console.log(`${this.name} did not borrow "${book.title}".`);
+        }
+    }
+}
 
